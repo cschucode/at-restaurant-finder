@@ -1,7 +1,9 @@
 import React from 'react';
 
+import DesktopLayout from './DesktopLayout';
+
 const App = () => {
-  return <div>Hello from App!</div>;
+  return <DesktopLayout />;
 }
 
 export default App;

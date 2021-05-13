@@ -1,0 +1,15 @@
+.desktop {
+  &__body {
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+  }
+
+  &__list-view {
+    flex: 1;
+  }
+
+  &__map-view {
+    flex: 2;
+  }
+}
