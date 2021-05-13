@@ -1,0 +1,42 @@
+.header {
+  align-items: center;
+  border-bottom: none;
+  box-shadow: 0 1px 2px #bbb;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  padding: 0 30px;
+
+
+  &__logo {
+    align-items: center;
+    display: flex;
+    height: 100%;
+
+    span {
+      font-size: 24px;
+    }
+  }
+
+  &__logo-image {
+    height: 100%;
+  }
+
+  &__search {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  &__search-button,
+  &__search-input {
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 100;
+    margin-right: 15px;
+    padding: 6px 12px;
+  }
+}
