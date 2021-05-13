@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Loader } from "@googlemaps/js-api-loader"
 
 import Header from './Header';
+import ListItem from './ListItem';
 
 import './DesktopLayout.scss';
 
@@ -37,9 +38,6 @@ const DesktopLayout = () => {
     const service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, (results, status) => {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
-        // for (var i = 0; i < results.length; i++) {
-        //   createMarker(results[i]);
-        // }
         setPlaces(results);
       }
     });
@@ -50,7 +48,7 @@ const DesktopLayout = () => {
       <Header />
       <div className="desktop__body">
         <div className="desktop__list-view">
-          {places.map(place => <div>{place.name}</div>)}
+          {places.map((place, idx) => <ListItem key={idx} place={place}/>)}
         </div>
         <div id="map" className="desktop__map-view">Map View</div>
       </div>

@@ -1,0 +1,35 @@
+.app {
+  color: #777;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100vw;
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__list-view {
+    background-color: #f8f8f8;
+    flex: 1;
+    padding: 30px;
+  }
+
+  &__map-view {
+    flex: 2;
+    position: relative;
+  }
+
+  &__screen-toggle {
+    bottom: 30px;
+    left: calc(50% - 50px);
+    position: absolute;
+    width: 100px;
+  }
+
+  // desktop styles
+  @media only screen and (min-width: 600px) {
+
+  }
+}
