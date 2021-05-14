@@ -1,67 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import { Loader } from "@googlemaps/js-api-loader"
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+// import { Loader } from "@googlemaps/js-api-loader"
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+} from '@react-google-maps/api';
+import usePlacesAutoComplete, {
+  getGeoCode,
+  getLatLng,
+} from 'use-places-autocomplete';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption
+} from '@reach/combobox'
+import '@reach/combobox/styles.css';
 
 import Header from './Header';
 import ListItem from './ListItem';
 
 import './DesktopLayout.scss';
 
-const DesktopLayout = () => {
-  const [places, setPlaces] = useState([]);
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100%',
+  height: '100%',
+}
+const center = {
+  lat: 37.7749,
+  lng: -122.4194
+}
 
-  const loader = new Loader({
-    apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    version: "weekly",
-    libraries: ['places'],
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true
+}
+
+const DesktopLayout = () => {
+  const { isLoaded, loadError } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries,
   });
 
-  useEffect(() => {
-    loader.load().then(() => {
-      const SF = new google.maps.LatLng(37.7749, -122.4194); // center of SF
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: SF,
-        zoom: 14,
-        disableDefaultUI: true,
-      });
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
 
-      const request = {
-        location: SF,
-        radius: 500 * 1000,
-        type: ['restaurant']
-      };
+  // const onMapClick = useCallback((event) => {
+  //   setMarkers((current) => [
+  //     ...current,
+  //      {
+  //        lat: event.latLng.lat(),
+  //        lng: event.latLng.lng(),
+  //        time: new Date()
+  //      }
+  //   ])
+  // }, []);
 
-      const service = new google.maps.places.PlacesService(map);
-      service.nearbySearch(request, (results, status) => {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          setPlaces(results);
-          console.log(results);
-          results.forEach((place) => {
-            const infowindow = new google.maps.InfoWindow({
-              content: '<div>Info Window</div>',
-            });
-            const marker = new google.maps.Marker({
-              position: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng()},
-              map: map,
-              title: place.name,
-            });
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    const request = {
+      location: new window.google.maps.LatLng(center.lat, center.lng),
+      radius: '500000',
+      type: ['restaurant']
+    };
 
-            marker.addListener('click', () => {
-              infowindow.open(map, marker);
-            });
-          })
-        }
-      });
+    const service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, (results, status) => {
+      setMarkers(results)
     });
+    mapRef.current = map;
   }, [])
+
+  if (loadError) return 'Error Loading Maps';
+  if (!isLoaded) return 'Loading Maps';
 
   return (
     <div className="desktop">
       <Header />
       <div className="desktop__body">
         <div className="desktop__list-view">
-          {places.map((place, idx) => <ListItem key={idx} place={place}/>)}
+          {markers.map((place, idx) => <ListItem key={idx} place={place}/>)}
         </div>
-        <div id="map" className="desktop__map-view"></div>
+        <div className="desktop__map-view">
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={12}
+          center={center}
+          options={options}
+          onLoad={onMapLoad}
+        >
+          {markers.map((marker) => {
+            return (<Marker
+                key={marker.place_id}
+                position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
+                onClick={() => {
+                  setSelected(marker);
+                }}
+              />
+            )
+          })}
+
+          {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={() => setSelected(null)} >
+              <ListItem place={selected} tooltip />
+            </InfoWindow>) : ''}
+        </GoogleMap>
+        </div>
       </div>
     </div>
   );
