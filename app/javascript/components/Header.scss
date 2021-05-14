@@ -41,19 +41,26 @@
   }
 
   &__search-input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
     border-right: none;
+    height: 16px;
     margin-right: 0;
     outline: none;
+    width: 250px;
   }
 
   &__search-btn {
     background-color: #fff;
-    background-image: url('../../assets/images/search.png');
+    background-image: url('../../assets/images/search_green.png');
+    background-position: 5px 5px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 18px 18px;
     border: 1px solid #bbb;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
     border-left: none;
-    height: 28px;
-    width: 28px;
+    height: 30px;
+    width: 30px;
   }
 }

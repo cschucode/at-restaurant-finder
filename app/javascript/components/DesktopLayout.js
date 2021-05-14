@@ -64,7 +64,7 @@ const DesktopLayout = () => {
     setSelected(null);
   }
 
-  const handleClick = (val) => {
+  const handleSearch = (val) => {
     const request = {
       query: val + 'san francisco', // workaround when location doesn't work :(
       location: new window.google.maps.LatLng(37.7749, -122.4194),
@@ -85,7 +85,7 @@ const DesktopLayout = () => {
 
   return (
     <div className="desktop">
-      <Header handleClick={handleClick} />
+      <Header handleSearch={handleSearch} />
       <div className="desktop__body">
         <div className="desktop__list-view">
           {markers.map((place) => <ListItem

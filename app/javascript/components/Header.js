@@ -4,9 +4,8 @@ import PlacesAutocomplete from './PlacesAutocomplete';
 
 import './Header.scss';
 
-
 const Header = ({ ...props }) => {
-  const { handleClick } = props;
+  const { handleSearch } = props;
   const [value, setValue] = useState('');
 
   return (
@@ -23,15 +22,15 @@ const Header = ({ ...props }) => {
           onChange={(e) => setValue(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
-              handleClick(value);
+              handleSearch(value);
               setValue('');
             }
           }}
           className="header__search-input"
           placeholder="Search for a restaurant" />
         <button className='header__search-btn' onClick={() => {
+          handleSearch(value);
           setValue('');
-          handleClick(value);
         }} ></button>
       </div>
     </div>
