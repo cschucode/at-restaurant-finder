@@ -40,8 +40,8 @@ const DesktopLayout = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     const request = {
-      location: new window.google.maps.LatLng(center.lat, center.lng),
-      radius: '500000',
+      location: new google.maps.LatLng(center.lat, center.lng),
+      radius: 50000,
       type: ['restaurant']
     };
 
@@ -64,27 +64,42 @@ const DesktopLayout = () => {
     setSelected(null);
   }
 
+  const handleClick = (val) => {
+    const request = {
+      query: val + 'san francisco', // workaround when location doesn't work :(
+      location: new window.google.maps.LatLng(37.7749, -122.4194),
+      radius: 50000,
+      openNow: true,
+      type: ['restaurant']
+    };
+
+    const service = new google.maps.places.PlacesService(mapRef.current);
+    service.textSearch(request, function(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        setMarkers(results);
+        console.log(results);
+        mapRef.current.setCenter(results[0].geometry.location);
+      }
+    });
+  }
+
   return (
     <div className="desktop">
-      <Header />
+      <Header handleClick={handleClick} />
       <div className="desktop__body">
         <div className="desktop__list-view">
-          {markers.map((place, idx) => <ListItem
-             key={idx}
+          {markers.map((place) => <ListItem
+             key={place.place_id}
              place={place}
-             onMouseEnter={() => {
-               setSelected(place);
-             }}
-             onMouseLeave={() => {
-               setSelected(null);
-             }}
+             onMouseEnter={() => setSelected(place)}
+             onMouseLeave={() => setSelected(null)}
              isSelected={selected}
           />)}
         </div>
         <div className="desktop__map-view">
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
-          zoom={12}
+          zoom={13}
           center={center}
           options={options}
           onLoad={onMapLoad}

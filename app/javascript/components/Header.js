@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 import PlacesAutocomplete from './PlacesAutocomplete';
 
 import './Header.scss';
 
 
-const Header = () => {
+const Header = ({ ...props }) => {
+  const { handleClick } = props;
+  const [value, setValue] = useState('');
+
   return (
     <div className="header">
       <div className="header__logo">
@@ -13,8 +16,23 @@ const Header = () => {
         <span>at Lunch</span>
       </div>
       <div className="header__search">
-        <button className="header__search-button">Filter</button>
-        <PlacesAutocomplete />
+        <button className="header__filter-btn">Filter</button>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleClick(value);
+              setValue('');
+            }
+          }}
+          className="header__search-input"
+          placeholder="Search for a restaurant" />
+        <button className='header__search-btn' onClick={() => {
+          setValue('');
+          handleClick(value);
+        }} ></button>
       </div>
     </div>
   )

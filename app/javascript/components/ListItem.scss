@@ -13,16 +13,6 @@
     transition: border-color 500ms;
   }
 
-  &.tool-tip {
-    border: none;
-    margin-bottom: 0;
-    padding: 5px;
-  }
-
-  &.tool-tip &__favorite-icon {
-    display: none;
-  }
-
   &__image {
     background-repeat: no-repeat;
     background-size: cover;
@@ -80,5 +70,16 @@
       background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-solid-3a3f7aa4.svg') no-repeat 50%;
       transition: background 500ms;
     }
+  }
+
+  // remove some styles from tooltip view
+  &.tool-tip {
+    border: none;
+    margin-bottom: 0;
+    padding: 5px;
+  }
+
+  &.tool-tip &__favorite-icon {
+    display: none;
   }
 }

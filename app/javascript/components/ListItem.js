@@ -25,7 +25,7 @@ const ListItem = ({ ...props }) => {
         </div>
         <div>
           {place.price_level ? <span className="list-item__pricing">{getPriceLevel(place.price_level)}<span> &#183; </span></span> : ''}
-          <span className="list-item__info">{place.vicinity}</span>
+          <span className="list-item__info">{place.vicinity || place.formatted_address}</span>
         </div>
         <button className={"list-item__favorite-icon" + (isFavorite ? ' favorite' : '')} onClick={() => setIsFavorite(!isFavorite)} />
       </div>
@@ -34,7 +34,7 @@ const ListItem = ({ ...props }) => {
 }
 
 const getPriceLevel = (level) => {
-  const dollars = ['', '$', '$$', '$$$', '$$$$', '$$$$$'];
+  const dollars = ['$', '$$', '$$$', '$$$$', '$$$$$'];
   return dollars[level];
 }
 
