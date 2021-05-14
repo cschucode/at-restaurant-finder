@@ -1,6 +1,9 @@
 import React from 'react';
 
+import PlacesAutocomplete from './PlacesAutocomplete';
+
 import './Header.scss';
+
 
 const Header = () => {
   return (
@@ -11,7 +14,7 @@ const Header = () => {
       </div>
       <div className="header__search">
         <button className="header__search-button">Filter</button>
-        <input className="header__search-input" type="text" placeholder="Search for a restaurant" />
+        <PlacesAutocomplete />
       </div>
     </div>
   )

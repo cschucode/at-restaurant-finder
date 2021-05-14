@@ -8,9 +8,25 @@
   padding: 15px;
   position: relative;
 
+  &:hover {
+    border: 1px solid green;
+    transition: border-color 500ms;
+  }
+
+  &.tool-tip {
+    border: none;
+    margin-bottom: 0;
+    padding: 5px;
+  }
+
+  &.tool-tip &__favorite-icon {
+    display: none;
+  }
+
   &__image {
     background-repeat: no-repeat;
     background-size: cover;
+    border: 1px solid #bbb;
     border-radius: 3px;
     height: 60px;
     margin-right: 15px;
@@ -60,7 +76,7 @@
     top: 15px;
     transition: background 500ms;
 
-    &.selected {
+    &.favorite {
       background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-solid-3a3f7aa4.svg') no-repeat 50%;
       transition: background 500ms;
     }

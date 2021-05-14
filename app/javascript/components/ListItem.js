@@ -5,11 +5,11 @@ import ReactStars from 'react-rating-stars-component';
 import './ListItem.scss';
 
 const ListItem = ({ ...props }) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const { place } = props;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { place, tooltip, onMouseEnter, onMouseLeave, isSelected } = props;
 
   return (
-    <div className="list-item">
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={'list-item' + (tooltip ? ' tool-tip' : '') + (isSelected ? ' selected' : '')} >
       <div className="list-item__image" style={{backgroundImage: `url(${place.icon})`}}></div>
       <div className="list-item__details">
         <p className="list-item__name">{place.name}</p>
@@ -27,7 +27,7 @@ const ListItem = ({ ...props }) => {
           {place.price_level ? <span className="list-item__pricing">{getPriceLevel(place.price_level)}<span> &#183; </span></span> : ''}
           <span className="list-item__info">{place.vicinity}</span>
         </div>
-        <button className={"list-item__favorite-icon" + (isSelected ? ' selected' : '')} onClick={() => setIsSelected(!isSelected)} />
+        <button className={"list-item__favorite-icon" + (isFavorite ? ' favorite' : '')} onClick={() => setIsFavorite(!isFavorite)} />
       </div>
     </div>
   );

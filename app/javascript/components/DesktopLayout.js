@@ -1,28 +1,17 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-// import { Loader } from "@googlemaps/js-api-loader"
 import {
   GoogleMap,
   useJsApiLoader,
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
-import usePlacesAutoComplete, {
-  getGeoCode,
-  getLatLng,
-} from 'use-places-autocomplete';
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption
-} from '@reach/combobox'
-import '@reach/combobox/styles.css';
 
 import Header from './Header';
 import ListItem from './ListItem';
 
 import './DesktopLayout.scss';
+
+import mapPin from 'images/map_pin.svg';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -48,17 +37,6 @@ const DesktopLayout = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  // const onMapClick = useCallback((event) => {
-  //   setMarkers((current) => [
-  //     ...current,
-  //      {
-  //        lat: event.latLng.lat(),
-  //        lng: event.latLng.lng(),
-  //        time: new Date()
-  //      }
-  //   ])
-  // }, []);
-
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     const request = {
@@ -77,12 +55,31 @@ const DesktopLayout = () => {
   if (loadError) return 'Error Loading Maps';
   if (!isLoaded) return 'Loading Maps';
 
+  const handleOnMouseEnter = () => {
+    console.log(this);
+    setSelected(this);
+  }
+
+  const onMouseLeave = () => {
+    setSelected(null);
+  }
+
   return (
     <div className="desktop">
       <Header />
       <div className="desktop__body">
         <div className="desktop__list-view">
-          {markers.map((place, idx) => <ListItem key={idx} place={place}/>)}
+          {markers.map((place, idx) => <ListItem
+             key={idx}
+             place={place}
+             onMouseEnter={() => {
+               setSelected(place);
+             }}
+             onMouseLeave={() => {
+               setSelected(null);
+             }}
+             isSelected={selected}
+          />)}
         </div>
         <div className="desktop__map-view">
         <GoogleMap
@@ -96,6 +93,12 @@ const DesktopLayout = () => {
             return (<Marker
                 key={marker.place_id}
                 position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
+                icon={{
+                  url: mapPin ,
+                  scaledSize: new window.google.maps.Size(30, 30),
+                  origin: new window.google.maps.Point(0, 0),
+                  anchor: new window.google.maps.Point(15, 0)
+                }}
                 onClick={() => {
                   setSelected(marker);
                 }}
