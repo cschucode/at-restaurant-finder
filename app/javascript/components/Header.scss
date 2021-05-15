@@ -1,3 +1,5 @@
+$at-green: #418a13;
+
 .header {
   align-items: center;
   border-bottom: none;
@@ -11,7 +13,6 @@
     flex-direction: row;
     padding: 0 30px;
   }
-
 
   &__logo {
     align-items: center;
@@ -42,7 +43,49 @@
     justify-content: flex-end;
   }
 
-  &__filter-btn,
+  &__sort {
+    position: relative;
+  }
+
+  &__sort-modal {
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    margin-top: 6px;
+    padding: 12px;
+    position: absolute;
+    left: 0;
+    width: 200px;
+    z-index: 10;
+
+    & #high,
+    & #low {
+      margin-bottom: 6px;
+    }
+
+    @media screen and (min-width: 768px) {
+      right: 12px;
+    }
+  }
+
+  &__apply-btn {
+    background-color: transparent;
+    border: none;
+    color: $at-green;
+    font-size: 16px;
+    font-weight: 600;
+    float: right;
+    margin-top: 15px;
+    outline: none;
+    padding: 6px 12px;
+
+    &:hover {
+      color: #2b5a0d;
+    }
+  }
+
+
+  &__sort-btn,
   &__search-input {
     background-color: #fff;
     border: 1px solid #bbb;
@@ -52,7 +95,7 @@
     padding: 6px 12px;
   }
 
-  &__filter-btn {
+  &__sort-btn {
     height: 30px;
     margin-right: 15px;
   }
@@ -63,7 +106,11 @@
     border-right: none;
     height: 16px;
     outline: none;
-    width: 250px;
+    width: 200px;
+
+    @media screen and (min-width: 768px) {
+      width: 250px;
+    }
   }
 
   &__search-btn {

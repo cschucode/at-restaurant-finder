@@ -9,9 +9,10 @@ import {
 import Header from './Header';
 import ListItem from './ListItem';
 
-import './DesktopLayout.scss';
-
+import { useViewport } from '../utils';
 import mapPin from 'images/map_pin.svg';
+
+import './DesktopLayout.scss';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -34,10 +35,15 @@ const DesktopLayout = () => {
     libraries,
   });
 
+  const { width } = useViewport();
+  const breakpoint = 768;
+
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [showMap, setShowMap] = useState(true);
 
   const mapRef = useRef();
+
   const onMapLoad = useCallback((map) => {
     const request = {
       location: new google.maps.LatLng(center.lat, center.lng),
@@ -52,19 +58,10 @@ const DesktopLayout = () => {
       setMarkers(results)
     });
 
-  }, [])
+  }, []);
 
   if (loadError) return 'Error Loading Maps';
   if (!isLoaded) return 'Loading Maps';
-
-  const handleOnMouseEnter = () => {
-    console.log(this);
-    setSelected(this);
-  }
-
-  const onMouseLeave = () => {
-    setSelected(null);
-  }
 
   const handleSearch = (val) => {
     const request = {
@@ -79,17 +76,33 @@ const DesktopLayout = () => {
     service.textSearch(request, function(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         setMarkers(results);
-        console.log(results);
         mapRef.current.setCenter(results[0].geometry.location);
       }
     });
   }
 
+  // This doesn't actually re-render the list view or markers yet (run useEffect when markers changes)
+  const handleSortClick = (sortDirection) => {
+    if (sortDirection === 'high') {
+      const currentMarkers = markers.sort((a, b) => b.rating - a.rating);
+      console.log('high to low', currentMarkers);
+      setMarkers(currentMarkers);
+    } else {
+      const currentMarkers = markers.sort((a, b) => a.rating - b.rating);
+      console.log('low to high', currentMarkers);
+      setMarkers(currentMarkers);
+    }
+  }
+
+  const isMobile = (width, breakpoint) => {
+    return width < breakpoint;
+  }
+
   return (
     <div className="desktop">
-      <Header handleSearch={handleSearch} />
+      <Header handleSearch={handleSearch} handleSortClick={handleSortClick} />
       <div className="desktop__body">
-        <div className="desktop__list-view">
+        {isMobile(width, breakpoint) && showMap ? '' : <div className="desktop__list-view">
           {markers.map((place) => <ListItem
              key={place.place_id}
              place={place}
@@ -97,8 +110,8 @@ const DesktopLayout = () => {
              onMouseLeave={() => setSelected(null)}
              isSelected={selected}
           />)}
-        </div>
-        <div className="desktop__map-view">
+        </div>}
+        {isMobile(width, breakpoint) && !showMap ? '' : <div className="desktop__map-view">
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           zoom={13}
@@ -130,8 +143,9 @@ const DesktopLayout = () => {
               <ListItem place={selected} tooltip />
             </InfoWindow>) : ''}
         </GoogleMap>
-        </div>
+        </div>}
       </div>
+      {isMobile(width, breakpoint) ? <button className="desktop__toggle-view" onClick={() => setShowMap(!showMap)}>{showMap ? 'List' : 'Map'}</button> : ''}
     </div>
   );
 }

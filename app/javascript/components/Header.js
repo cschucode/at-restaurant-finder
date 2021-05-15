@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
 
-import PlacesAutocomplete from './PlacesAutocomplete';
-
 import './Header.scss';
 
 const Header = ({ ...props }) => {
-  const { handleSearch } = props;
+  const { handleSearch, handleSortClick } = props;
   const [value, setValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [sortValue, setSortValue] = useState('high');
 
   return (
     <div className="header">
@@ -15,7 +15,17 @@ const Header = ({ ...props }) => {
         <span>at Lunch</span>
       </div>
       <div className="header__search">
-        <button className="header__filter-btn">Filter</button>
+        <div className="header__sort">
+          <button className="header__sort-btn" onClick={() => setShowModal(true)}>Sort</button>
+          {showModal ? (<div className="header__sort-modal" onMouseLeave={() => setShowModal(false)}>
+              <input type="radio" id="high" name="rating-group" value="high" onClick={(e) => setSortValue(e.target.value)} /><label htmlFor="high">Ratings high to low</label><br />
+              <input type="radio" id="low" name="rating-group" value="low" onClick={(e) => setSortValue(e.target.value)} /><label htmlFor="low">Ratings low to high</label><br />
+              <button className="header__apply-btn" onClick={(e) => {
+                handleSortClick(sortValue);
+                setShowModal(false);
+              }} >Apply</button>
+            </div>) : ''}
+        </div>
         <input
           type="text"
           value={value}

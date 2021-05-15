@@ -3,7 +3,11 @@
   &__body {
     display: flex;
     flex-direction: row;
-    height: 580px;
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+      height: 580px;
+    }
   }
 
   &__list-view {
@@ -15,5 +19,19 @@
 
   &__map-view {
     flex: 2;
+  }
+
+  &__toggle-view {
+    background-color: #418A15;
+    border: 1px solid darkgreen;
+    border-radius: 3px;
+    bottom: 30px;
+    color: #fff;
+    font-size: 16px;
+    left: calc(50% - 50px);
+    outline: none;
+    padding: 12px;
+    position: absolute;
+    width: 100px;
   }
 }
