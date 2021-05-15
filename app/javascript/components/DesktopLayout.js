@@ -111,36 +111,36 @@ const DesktopLayout = () => {
              isSelected={selected}
           />)}
         </div>}
-        {isMobile(width, breakpoint) && !showMap ? '' : <div className="desktop__map-view">
-        <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={13}
-          center={center}
-          options={options}
-          onLoad={onMapLoad}
-        >
-          {markers.map((marker) => {
-            return (<Marker
-                key={marker.place_id}
-                position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
-                icon={{
-                  url: mapPin,
-                  scaledSize: new window.google.maps.Size(30, 30),
-                  origin: new window.google.maps.Point(0, 0),
-                  anchor: new window.google.maps.Point(15, 0),
-                }}
-                onClick={() => {
-                  setSelected(marker);
-                }}
-              />
-            )
-          })}
+        <div className={`desktop__map-view ${isMobile(width, breakpoint) && !showMap ? ' hide' : ''}`}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={13}
+            center={center}
+            options={options}
+            onLoad={onMapLoad}
+          >
+            {markers.map((marker) => {
+              return (<Marker
+                  key={marker.place_id}
+                  position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
+                  icon={{
+                    url: mapPin,
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(15, 0),
+                  }}
+                  onClick={() => {
+                    setSelected(marker);
+                  }}
+                />
+              )
+            })}
 
-          {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={() => setSelected(null)} >
-              <ListItem place={selected} tooltip />
-            </InfoWindow>) : ''}
-        </GoogleMap>
-        </div>}
+            {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={() => setSelected(null)} >
+                <ListItem place={selected} tooltip />
+              </InfoWindow>) : ''}
+          </GoogleMap>
+        </div>
       </div>
       {isMobile(width, breakpoint) ? <button className="desktop__toggle-view" onClick={() => setShowMap(!showMap)}>{showMap ? 'List' : 'Map'}</button> : ''}
     </div>
