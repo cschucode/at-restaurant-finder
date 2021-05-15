@@ -75,6 +75,7 @@ const DesktopLayout = () => {
     const service = new google.maps.places.PlacesService(mapRef.current);
     service.textSearch(request, function(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
         setMarkers(results);
         mapRef.current.setCenter(results[0].geometry.location);
       }
