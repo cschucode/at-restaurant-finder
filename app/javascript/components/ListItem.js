@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import ReactStars from 'react-rating-stars-component';
 
+import { getPriceLevel, truncateText } from '../utils';
+
 import './ListItem.scss';
 
 const ListItem = ({ ...props }) => {
@@ -25,17 +27,12 @@ const ListItem = ({ ...props }) => {
         </div>
         <div>
           {place.price_level ? <span className="list-item__pricing">{getPriceLevel(place.price_level)}<span> &#183; </span></span> : ''}
-          <span className="list-item__info">{place.vicinity || place.formatted_address}</span>
+          <span className="list-item__info">{truncateText(place.vicinity || place.formatted_address)}</span>
         </div>
         <button className={"list-item__favorite-icon" + (isFavorite ? ' favorite' : '')} onClick={() => setIsFavorite(!isFavorite)} />
       </div>
     </div>
   );
-}
-
-const getPriceLevel = (level) => {
-  const dollars = ['$', '$$', '$$$', '$$$$', '$$$$$'];
-  return dollars[level];
 }
 
 export default ListItem;

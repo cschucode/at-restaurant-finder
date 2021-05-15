@@ -45,11 +45,13 @@ const DesktopLayout = () => {
       type: ['restaurant']
     };
 
-    const service = new google.maps.places.PlacesService(map);
+    mapRef.current = map;
+
+    const service = new google.maps.places.PlacesService(mapRef.current);
     service.nearbySearch(request, (results, status) => {
       setMarkers(results)
     });
-    mapRef.current = map;
+
   }, [])
 
   if (loadError) return 'Error Loading Maps';
@@ -109,10 +111,13 @@ const DesktopLayout = () => {
                 key={marker.place_id}
                 position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
                 icon={{
-                  url: mapPin ,
+                  url: mapPin,
                   scaledSize: new window.google.maps.Size(30, 30),
                   origin: new window.google.maps.Point(0, 0),
-                  anchor: new window.google.maps.Point(15, 0)
+                  anchor: new window.google.maps.Point(15, 0),
+                  fillColor: selected ? '#87b421' : '#bbb',
+                  fillOpacity: 1,
+                  strokeColor: selected ? '#8yb421' : '#bbb'
                 }}
                 onClick={() => {
                   setSelected(marker);
