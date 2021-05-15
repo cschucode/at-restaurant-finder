@@ -5,12 +5,12 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 12px 30px 12px 12px;
   position: relative;
 
   &:hover {
-    border: 1px solid green;
-    transition: border-color 500ms;
+    border: 1px solid #418A15;
+    transition: border-color 200ms;
   }
 
   &__image {
@@ -31,13 +31,9 @@
   }
 
   &__name {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     margin: 0;
-    width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   &__rating {
@@ -57,18 +53,20 @@
   }
 
   &__favorite-icon {
-    background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-dark-a05b1a78.svg') no-repeat 50%;
+    background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-dark-a05b1a78.svg') no-repeat;
+    background-size: contain;
     border: none;
     height: 24px;
     width: 24px;
     position: absolute;
-    right: 15px;
-    top: 15px;
-    transition: background 500ms;
+    right: 6px;
+    top: 6px;
+    transition: background 200ms;
 
     &.favorite {
-      background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-solid-3a3f7aa4.svg') no-repeat 50%;
-      transition: background 500ms;
+      background: url('https://cdn-assets.alltrails.com/assets/packs/media/search/icon-action-favorite-solid-3a3f7aa4.svg') no-repeat;
+      background-size: contain;
+      transition: background 200ms;
     }
   }
 
@@ -76,10 +74,15 @@
   &.tool-tip {
     border: none;
     margin-bottom: 0;
-    padding: 5px;
-  }
+    padding: 0;
 
-  &.tool-tip &__favorite-icon {
-    display: none;
+    .list-item__favorite-icon {
+      display: none;
+    }
+
+    .list-item__image {
+      height: 45px;
+      width: 45px;
+    }
   }
 }

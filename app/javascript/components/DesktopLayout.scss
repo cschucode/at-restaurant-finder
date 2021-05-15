@@ -3,10 +3,10 @@
   &__body {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: calc(100vh - 84px); // 84px = header (height+padding-top+padding-bottom)
 
     @media screen and (min-width: 768px) {
-      height: 580px;
+      height: calc(100vh - 60px);
     }
   }
 

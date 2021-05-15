@@ -128,9 +128,6 @@ const DesktopLayout = () => {
                   scaledSize: new window.google.maps.Size(30, 30),
                   origin: new window.google.maps.Point(0, 0),
                   anchor: new window.google.maps.Point(15, 0),
-                  fillColor: selected ? '#87b421' : '#bbb',
-                  fillOpacity: 1,
-                  strokeColor: selected ? '#8yb421' : '#bbb'
                 }}
                 onClick={() => {
                   setSelected(marker);

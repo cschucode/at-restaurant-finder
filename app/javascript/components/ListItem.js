@@ -20,7 +20,7 @@ const ListItem = ({ ...props }) => {
             count={5}
             edit={false}
             value={Math.round(place.rating)}
-            size={16}
+            size={tooltip ? 12 : 14}
             activeColor="#ffd700"
           />
           <span className="list-item__rating-count">({place.user_ratings_total})</span>
