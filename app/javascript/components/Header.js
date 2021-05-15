@@ -9,7 +9,7 @@ const Header = ({ ...props }) => {
   const [sortValue, setSortValue] = useState('high'); // TODO: sort feature
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__logo">
         <img src="https://cdn-assets.alltrails.com/assets/shared/AT_Main_Logo-da354e8947c2636e86fb27f60cbb037b.png" alt="All Trails Logo" className="header__logo-image" />
         <span>at Lunch</span>
@@ -43,7 +43,7 @@ const Header = ({ ...props }) => {
           setValue('');
         }} ></button>
       </div>
-    </div>
+    </header>
   )
 }
 

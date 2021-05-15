@@ -21,12 +21,11 @@ const ListItem = ({ ...props }) => {
       setCookie(id, true);
       setIsFavorite(true);
     }
-    console.log(cookies);
   }
 
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={'list-item' + (tooltip ? ' tool-tip' : '') + (isSelected ? ' selected' : '')} >
-      <div className="list-item__image" style={{backgroundImage: `url(${place.icon})`}}></div>
+      <div className="list-item__image" style={{backgroundImage: `url(${place.photos[0].getUrl()})`}}></div>
       <div className="list-item__details">
         <p className="list-item__name">{place.name}</p>
         <div className="list-item__rating">

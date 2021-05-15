@@ -55,7 +55,7 @@ const App = () => {
 
     const service = new google.maps.places.PlacesService(mapRef.current);
     service.nearbySearch(request, (results, status) => {
-      setMarkers(results)
+      setMarkers(results);
     });
 
   }, []);
@@ -103,7 +103,7 @@ const App = () => {
   return (
     <div className="app">
       <Header handleSearch={handleSearch} handleSortClick={handleSortClick} />
-      <div className="app__body">
+      <main className="app__body">
         {isMobile(width, breakpoint) && showMap ? '' : <div className="app__list-view">
           {markers.map((place) => <ListItem
             key={place.place_id}
@@ -143,7 +143,7 @@ const App = () => {
               </InfoWindow>) : ''}
           </GoogleMap>
         </div>
-      </div>
+      </main>
       {isMobile(width, breakpoint) ? <button className="app__toggle-view" onClick={() => setShowMap(!showMap)}>{showMap ? 'List' : 'Map'}</button> : ''}
     </div>
   );
