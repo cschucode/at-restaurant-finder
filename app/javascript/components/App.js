@@ -9,7 +9,7 @@ import {
 import Header from './Header';
 import ListItem from './ListItem';
 
-import { useViewport } from '../utils';
+import { useViewport, isMobile } from '../utils';
 import mapPin from 'images/map_pin.svg';
 
 import './App.scss';
@@ -45,6 +45,7 @@ const App = () => {
   const mapRef = useRef();
 
   const onMapLoad = useCallback((map) => {
+    // show nearby places on initial map load
     const request = {
       location: new google.maps.LatLng(center.lat, center.lng),
       radius: 50000,
@@ -64,8 +65,9 @@ const App = () => {
   if (!isLoaded) return 'Loading Maps';
 
   const handleSearch = (val) => {
+    // use text search to find places by input string
     const request = {
-      query: val + 'san francisco', // workaround when location doesn't work :(
+      query: val + 'san francisco', // TODO: fix this workaround when location doesn't work :(
       location: new window.google.maps.LatLng(37.7749, -122.4194),
       radius: 50000,
       openNow: true,
@@ -94,10 +96,6 @@ const App = () => {
     //   console.log('low to high', currentMarkers);
     //   setMarkers(currentMarkers);
     // }
-  }
-
-  const isMobile = (width, breakpoint) => {
-    return width < breakpoint;
   }
 
   return (

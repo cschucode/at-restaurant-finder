@@ -25,3 +25,7 @@ export const useViewport = () => {
   // Return the width so we can use it in our components
   return { width };
 }
+
+export const isMobile = (width, breakpoint) => {
+  return width < breakpoint;
+}
