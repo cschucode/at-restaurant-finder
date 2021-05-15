@@ -5,8 +5,8 @@ import './Header.scss';
 const Header = ({ ...props }) => {
   const { handleSearch, handleSortClick } = props;
   const [value, setValue] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [sortValue, setSortValue] = useState('high');
+  const [showModal, setShowModal] = useState(false); // TODO:  sort feature
+  const [sortValue, setSortValue] = useState('high'); // TODO: sort feature
 
   return (
     <div className="header">
@@ -23,7 +23,7 @@ const Header = ({ ...props }) => {
               <button className="header__apply-btn" onClick={(e) => {
                 handleSortClick(sortValue);
                 setShowModal(false);
-              }} >Apply</button>
+              }} disabled>Comming Soon</button>
             </div>) : ''}
         </div>
         <input
