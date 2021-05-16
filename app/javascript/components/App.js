@@ -67,7 +67,7 @@ const App = () => {
   const handleSearch = (val) => {
     // use text search to find places by input string
     const request = {
-      query: val + 'san francisco', // TODO: fix this workaround when location doesn't work :(
+      query: `${val} san francisco`, // TODO: fix this workaround when location doesn't work :(
       location: new window.google.maps.LatLng(37.7749, -122.4194),
       radius: 50000,
       openNow: true,
