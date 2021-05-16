@@ -1,19 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to the AT Restaurant Finder App. This repo uses a React front-end using a Rails Server. It also makes use
+of the Google Maps and Google Places API in which you will need to store a `REACT_APP_GOOGLE_MAPS_API_KEY` in your `.env` file.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby 2.6.3 and Rails 6.1.3.2
 
 * System dependencies
 
 * Configuration
-
-* Database creation
-
-* Database initialization
 
 * How to run the test suite
 
