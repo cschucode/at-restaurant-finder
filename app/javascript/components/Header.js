@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import './Header.scss';
 
@@ -46,5 +47,10 @@ const Header = ({ ...props }) => {
     </header>
   )
 }
+
+Header.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
+  handleSortClick: PropTypes.func.isRequired,
+};
 
 export default Header;

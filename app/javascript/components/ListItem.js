@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 import { useCookies } from 'react-cookie';
-
 
 import { getPriceLevel, truncateText } from '../utils';
 
@@ -47,5 +47,19 @@ const ListItem = ({ ...props }) => {
     </div>
   );
 }
+
+ListItem.propTypes = {
+  place: PropTypes.shape({
+    place_id: PropTypes.string.isRequired,
+    photos: PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    user_ratings_total: PropTypes.number.isRequired,
+    price_level: PropTypes.number,
+    vicinity: PropTypes.string,
+    formatted_address: PropTypes.string
+  }),
+  tooltip: PropTypes.bool,
+};
 
 export default ListItem;
