@@ -8,8 +8,9 @@ of the Google Maps and Google Places API in which you will need to store a `REAC
 The setups steps expect following tools installed on the system.
 
 - Github
-- Ruby [2.6.3](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
-- Rails [6.1.3](https://github.com/organization/project-name/blob/master/Gemfile#L12)
+- Ruby [2.6.3](https://github.com/cschucode/at-restaurant-finder/blob/main/.ruby-version#L1)
+- Rails [6.1.3](https://github.com/cschucode/at-restaurant-finder/blob/main/Gemfile#L7)
+- React [17.0.2](https://github.com/cschucode/at-restaurant-finder/blob/main/package.json#L15)
 
 ##### 1. Check out the repository
 
