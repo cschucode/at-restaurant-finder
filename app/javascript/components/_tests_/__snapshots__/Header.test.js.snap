@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> Render Header component 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="header__logo"
+  >
+    <img
+      alt="All Trails Logo"
+      className="header__logo-image"
+      src="https://cdn-assets.alltrails.com/assets/shared/AT_Main_Logo-da354e8947c2636e86fb27f60cbb037b.png"
+    />
+    <span>
+      at Lunch
+    </span>
+  </div>
+  <div
+    className="header__search"
+  >
+    <div
+      className="header__sort"
+    >
+      <button
+        className="header__sort-btn"
+        onClick={[Function]}
+      >
+        Sort
+      </button>
+      
+    </div>
+    <input
+      className="header__search-input"
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="Search for a restaurant"
+      type="text"
+      value=""
+    />
+    <button
+      className="header__search-btn"
+      onClick={[Function]}
+    />
+  </div>
+</header>
+`;

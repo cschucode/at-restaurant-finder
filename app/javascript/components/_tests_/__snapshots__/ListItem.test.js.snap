@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListItem /> Render ListItem component 1`] = `
+<div
+  className="list-item"
+>
+  <div
+    className="list-item__image"
+    style={
+      Object {
+        "backgroundImage": "url(www.image.png)",
+      }
+    }
+  />
+  <div
+    className="list-item__details"
+  >
+    <p
+      className="list-item__name"
+    >
+      Mock Restaurant
+    </p>
+    <div
+      className="list-item__rating"
+    >
+      <div
+        className="react-stars-wrapper-"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          aria-label="add rating by typing an integer from 0 to 5 or pressing arrow keys"
+          className=""
+          onKeyDown={[Function]}
+          style={
+            Object {
+              "overflow": "hidden",
+              "position": "relative",
+            }
+          }
+          tabIndex={null}
+        >
+          <p
+            role="status"
+            style={
+              Object {
+                "left": "-200rem",
+                "position": "absolute",
+              }
+            }
+          >
+            0
+          </p>
+        </div>
+      </div>
+      <span
+        className="list-item__rating-count"
+      >
+        (
+        135
+        )
+      </span>
+    </div>
+    <div>
+      <span
+        className="list-item__pricing"
+      >
+        $$$
+        <span>
+           · 
+        </span>
+      </span>
+      <span
+        className="list-item__info"
+      >
+        123 Lombard Street
+      </span>
+    </div>
+    <button
+      className="list-item__favorite-icon"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;
