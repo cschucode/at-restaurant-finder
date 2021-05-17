@@ -35,3 +35,18 @@ bundle exec rails s
 ```
 
 And now you can visit the site with the URL http://localhost:3000
+
+##### 4. Jest Snapshot Testing
+
+Run jest snapshot tests with the following command
+
+```bash
+yarn test
+```
+
+To update snapshots during development add the update modifier
+
+```bash
+yarn test -u
+```
+
