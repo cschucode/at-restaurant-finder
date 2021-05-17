@@ -29,3 +29,8 @@ export const useViewport = () => {
 export const isMobile = (width, breakpoint) => {
   return width < breakpoint;
 }
+
+export const markerHighlight = (markers, current) => {
+    markers.forEach((marker) => marker.highlight = false);
+    current.highlight = true;
+}

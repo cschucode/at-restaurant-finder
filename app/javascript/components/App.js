@@ -9,7 +9,7 @@ import {
 import Header from './Header';
 import ListItem from './ListItem';
 
-import { useViewport, isMobile } from '../utils';
+import { useViewport, isMobile, markerHighlight } from '../utils';
 import mapPin from 'images/map_pin.svg';
 
 import './App.scss';
@@ -120,7 +120,7 @@ const App = () => {
             options={options}
             onLoad={onMapLoad}
           >
-            {markers.map((marker) => {
+            {markers.map((marker, idx) => {
               return (<Marker
                   key={marker.place_id}
                   position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
@@ -128,12 +128,14 @@ const App = () => {
                     path: "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z",
                     scale: 2,
                     origin: new window.google.maps.Point(0, 0),
-                    anchor: new window.google.maps.Point(15, 0),
+                    anchor: new window.google.maps.Point(12, 2),
                     fillOpacity: 1,
-                    fillColor: selected ? '#418A15' : '#999',
+                    fillColor: marker.highlight ? '#418A15' :'#999',
                     strokeColor: '#fff'
                   }}
+
                   onClick={() => {
+                    markerHighlight(markers, marker);
                     setSelected(marker);
                   }}
                 />
