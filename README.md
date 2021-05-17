@@ -20,7 +20,7 @@ git clone git@github.com:cschucode/at-restaurant-finder.git
 ##### 2. Add Google Maps API Key to .env file
 
 ```bash
-REACT_APP_GOOGLE_MAPS_API_KEY="<YOUR_API_KEY"
+REACT_APP_GOOGLE_MAPS_API_KEY="<YOUR_API_KEY>"
 ```
 
 ##### 3. Start the Rails server

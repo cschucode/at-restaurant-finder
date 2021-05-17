@@ -9,7 +9,8 @@
   position: relative;
 
   &:hover {
-    border: 1px solid #418A15;
+    border: 2px solid #418A15;
+    padding: 11px 29px 11px 11px; // reduce padding by 1px to account for border increase
     transition: border-color 200ms;
   }
 

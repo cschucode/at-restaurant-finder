@@ -125,10 +125,13 @@ const App = () => {
                   key={marker.place_id}
                   position={{ lat: marker.geometry.location.lat(), lng: marker.geometry.location.lng() }}
                   icon={{
-                    url: mapPin,
-                    scaledSize: new window.google.maps.Size(30, 30),
+                    path: "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z",
+                    scale: 2,
                     origin: new window.google.maps.Point(0, 0),
                     anchor: new window.google.maps.Point(15, 0),
+                    fillOpacity: 1,
+                    fillColor: selected ? '#418A15' : '#999',
+                    strokeColor: '#fff'
                   }}
                   onClick={() => {
                     setSelected(marker);
