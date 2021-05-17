@@ -1,15 +1,18 @@
 # README
 
-Welcome to the AT Restaurant Finder App. This repo uses a React front-end using a Rails Server. It also makes use
-of the Google Maps and Google Places API in which you will need to store a `REACT_APP_GOOGLE_MAPS_API_KEY` in your `.env` file.
+Welcome to the AT Restaurant Finder App. This repo uses a [React](https://reactjs.org/) front-end using a
+[Ruby on Rails](https://guides.rubyonrails.org/) Server. It also makes use of the [Google Maps](https://developers.google.com/maps)
+and [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview) in which you will need to
+store a `REACT_APP_GOOGLE_MAPS_API_KEY` in your `.env` file.
 
 ##### Prerequisites
 
 The setups steps expect following tools installed on the system.
 
 - Github
-- Ruby [2.6.3](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
-- Rails [6.1.3](https://github.com/organization/project-name/blob/master/Gemfile#L12)
+- Ruby [2.6.3](https://github.com/cschucode/at-restaurant-finder/blob/main/.ruby-version#L1)
+- Rails [6.1.3](https://github.com/cschucode/at-restaurant-finder/blob/main/Gemfile#L7)
+- React [17.0.2](https://github.com/cschucode/at-restaurant-finder/blob/main/package.json#L15)
 
 ##### 1. Check out the repository
 
