@@ -107,8 +107,14 @@ const App = () => {
           {markers.map((place) => <ListItem
             key={place.place_id}
             place={place}
-            onMouseEnter={() => setSelected(place)}
-            onMouseLeave={() => setSelected(null)}
+            onMouseEnter={() => {
+              markerHighlight(markers, place);
+              setSelected(place);
+            }}
+            onMouseLeave={() => {
+              markerHighlight(markers, {})
+              setSelected(null)
+            }}
             isSelected={selected}
           />)}
         </div>}
