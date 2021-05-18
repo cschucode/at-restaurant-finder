@@ -164,7 +164,6 @@ const App = () => {
                 />
               )
             })}
-
             {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={handleCloseInfoWindowClick} >
                 <ListItem place={selected} tooltip />
               </InfoWindow>) : ''}
