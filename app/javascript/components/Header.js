@@ -6,8 +6,8 @@ import './Header.scss';
 const Header = ({ ...props }) => {
   const { handleSearch, handleSortClick } = props;
   const [value, setValue] = useState('');
-  const [showModal, setShowModal] = useState(false); // TODO:  sort feature
-  const [sortValue, setSortValue] = useState('high'); // TODO: sort feature
+  const [showModal, setShowModal] = useState(false);
+  const [sortValue, setSortValue] = useState('high');
 
   return (
     <header className="header">

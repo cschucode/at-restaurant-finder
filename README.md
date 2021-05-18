@@ -49,4 +49,3 @@ To update snapshots during development add the update modifier
 ```bash
 yarn test -u
 ```
-

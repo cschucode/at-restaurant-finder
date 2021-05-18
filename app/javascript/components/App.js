@@ -156,7 +156,8 @@ const App = () => {
                   }}
 
                   onClick={() => {
-
+                    markerHighlight(markers, marker);
+                    setSelected(marker);
                   }}
                 />
               )
