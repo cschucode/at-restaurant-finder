@@ -5,7 +5,7 @@ import Header from '../Header';
 describe('<Header />', () => {
   test('Render Header component', () => {
     const component = renderer.create(
-      <Header />
+      <Header handleSearch={jest.fn()} handleSortClick={jest.fn()} />
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();

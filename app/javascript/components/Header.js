@@ -24,7 +24,7 @@ const Header = ({ ...props }) => {
               <button className="header__apply-btn" onClick={(e) => {
                 handleSortClick(sortValue);
                 setShowModal(false);
-              }} disabled>Comming Soon</button>
+              }}>Apply</button>
             </div>) : ''}
         </div>
         <input

@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 
 describe('<ListItem />', () => {
   test('Render ListItem component', () => {
-    const mockPlace={
+    const mockAPIPlace={
       name: 'Mock Restaurant',
       photos: [{
         getUrl: () => {
@@ -20,7 +20,7 @@ describe('<ListItem />', () => {
 
     const component = renderer.create(
       <ListItem
-        place={mockPlace}
+        place={mockAPIPlace}
       />
     );
 

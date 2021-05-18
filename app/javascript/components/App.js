@@ -10,7 +10,6 @@ import Header from './Header';
 import ListItem from './ListItem';
 
 import { useViewport, isMobile, markerHighlight } from '../utils';
-import mapPin from 'images/map_pin.svg';
 
 import './App.scss';
 
@@ -84,19 +83,26 @@ const App = () => {
     });
   }
 
-  // This doesn't actually re-render the list view or markers yet (run useEffect when markers changes)
   const handleSortClick = (sortDirection) => {
-    // TODO:
     console.log('Sort feature coming soon.');
-    // if (sortDirection === 'high') {
-    //   const currentMarkers = markers.sort((a, b) => b.rating - a.rating);
-    //   console.log('high to low', currentMarkers);
-    //   setMarkers(currentMarkers);
-    // } else {
-    //   const currentMarkers = markers.sort((a, b) => a.rating - b.rating);
-    //   console.log('low to high', currentMarkers);
-    //   setMarkers(currentMarkers);
-    // }
+    if (sortDirection === 'high') {
+      const currentMarkers = markers.sort((a, b) => b.rating - a.rating);
+      console.log('high to low', currentMarkers);
+      setMarkers(currentMarkers);
+    } else {
+      const currentMarkers = markers.sort((a, b) => a.rating - b.rating);
+      console.log('low to high', currentMarkers);
+      setMarkers(currentMarkers);
+    }
+  }
+
+  const handleCloseClick = () => {
+    markerHighlight(markers, {})
+    setSelected(null);
+  }
+
+  const handleToggleView = () => {
+    setShowMap(!showMap);
   }
 
   return (
@@ -148,13 +154,17 @@ const App = () => {
               )
             })}
 
-            {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={() => setSelected(null)} >
+            {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={handleCloseClick} >
                 <ListItem place={selected} tooltip />
               </InfoWindow>) : ''}
           </GoogleMap>
         </div>
       </main>
-      {isMobile(width, breakpoint) ? <button className="app__toggle-view" onClick={() => setShowMap(!showMap)}>{showMap ? 'List' : 'Map'}</button> : ''}
+      {isMobile(width, breakpoint) ? (
+        <button className="app__toggle-view" onClick={handleToggleView}>
+          {showMap ? 'List' : 'Map'}
+        </button>
+      ) : ''}
     </div>
   );
 };

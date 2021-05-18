@@ -29,17 +29,27 @@
   }
 
   &__toggle-view {
+    align-items: center;
     background-color: #418A15;
     border: 1px solid darkgreen;
     border-radius: 3px;
     bottom: 30px;
     color: #fff;
+    display: flex;
     font-size: 16px;
+    justify-content: center;
     left: calc(50% - 50px);
     outline: none;
     padding: 12px;
     position: absolute;
     width: 100px;
+  }
+
+  &__toggle-icon {
+    fill: #fff;
+    height: 16px;
+    margin-right: 6px;
+    width: 16px;
   }
 
   .hide {
