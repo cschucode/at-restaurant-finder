@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
   GoogleMap,
   useJsApiLoader,
@@ -60,6 +60,14 @@ const App = () => {
 
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('click', handleSortClick);
+
+    return () => {
+      window.removeEventListener('click', handleSortClick);
+    }
+  }, []);
+
   if (loadError) return 'Error Loading Maps';
   if (!isLoaded) return 'Loading Maps';
 
@@ -76,7 +84,6 @@ const App = () => {
     const service = new google.maps.places.PlacesService(mapRef.current);
     service.textSearch(request, function(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results);
         setMarkers(results);
         mapRef.current.setCenter(results[0].geometry.location);
       }
@@ -84,19 +91,21 @@ const App = () => {
   }
 
   const handleSortClick = (sortDirection) => {
-    console.log('Sort feature coming soon.');
+    const markersCopy = markers.slice();
+    let sortedMarkers;
+
     if (sortDirection === 'high') {
-      const currentMarkers = markers.sort((a, b) => b.rating - a.rating);
-      console.log('high to low', currentMarkers);
-      setMarkers(currentMarkers);
+      // sort high to low
+      sortedMarkers = markersCopy.sort((a, b) => b.rating - a.rating);
     } else {
-      const currentMarkers = markers.sort((a, b) => a.rating - b.rating);
-      console.log('low to high', currentMarkers);
-      setMarkers(currentMarkers);
+      // sort low to high
+      sortedMarkers = markersCopy.sort((a, b) => a.rating - b.rating);
     }
+
+    setMarkers(sortedMarkers);
   }
 
-  const handleCloseClick = () => {
+  const handleCloseInfoWindowClick = () => {
     markerHighlight(markers, {})
     setSelected(null);
   }
@@ -147,14 +156,13 @@ const App = () => {
                   }}
 
                   onClick={() => {
-                    markerHighlight(markers, marker);
-                    setSelected(marker);
+
                   }}
                 />
               )
             })}
 
-            {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={handleCloseClick} >
+            {selected ? (<InfoWindow position={{lat: selected.geometry.location.lat(), lng: selected.geometry.location.lng() }}  onCloseClick={handleCloseInfoWindowClick} >
                 <ListItem place={selected} tooltip />
               </InfoWindow>) : ''}
           </GoogleMap>
