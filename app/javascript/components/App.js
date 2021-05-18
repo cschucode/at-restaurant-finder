@@ -5,6 +5,8 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
+import { IconContext } from 'react-icons';
+import { MdList, MdLocationOn} from 'react-icons/md';
 
 import Header from './Header';
 import ListItem from './ListItem';
@@ -171,7 +173,10 @@ const App = () => {
       </main>
       {isMobile(width, breakpoint) ? (
         <button className="app__toggle-view" onClick={handleToggleView}>
-          {showMap ? 'List' : 'Map'}
+          <IconContext.Provider value={{ style: { fontSize: '24px', color: '#fff', marginRight: '3px' }}}>
+            {showMap ? <MdList />: <MdLocationOn />}
+            {showMap ? ' List' : ' Map'}
+          </IconContext.Provider>
         </button>
       ) : ''}
     </div>
